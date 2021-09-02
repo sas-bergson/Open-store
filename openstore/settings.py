@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'openstore.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +76,12 @@ WSGI_APPLICATION = 'openstore.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'openstore_db',
+        'USER': 'openstore@dmin',
+        'PASSWORD': 'openStore@pp123456789',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -113,11 +118,56 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+#Logging Configuration
+import logging.config
+LOGGING_CONFIG = None
+LOG_LEVEL = os.environ.get('LOGLEVEL', 'debug').upper()
+logging.config.dictConfig(
+    {
+        'version': 1,
+        'disable_existing_loggers': False,
+        ## Formatters ######################
+        'formatters': {
+                'verbose':{
+                        'format': '%(levelname)s | %(asctime)s | %(module)s | %(message)s',
+                        'datefmt': '%m/%d/%Y %H:%M:%S',
+                    },
+                'simple':{'format':'%(levelname)s | %(asctime)s | %(message)s'},
+            },
+        ## Handlers ########################
+        'handlers': {
+                'console': {
+                        'class': 'logging.StreamHandler',
+                        'formatter': 'simple',
+                    },
+                'logfile': {
+                        'class': 'logging.handlers.RotatingFileHandler',
+                        'filename': os.path.join(BASE_DIR, 'django.log'),
+                        'maxBytes': 1024 * 1024, # 1Mb
+                        'backupCount': 10,
+                        'formatter': 'verbose',
+                    },
+            },
+        ## loggers ########################
+        'loggers': {
+            #root logger
+                '': {
+                        'level': 'DEBUG',
+                        'handlers': ['console', 'logfile'],
+                    },
+            },
+    }
+)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS =(
+    os.path.join(BASE_DIR, STATIC_URL),
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
