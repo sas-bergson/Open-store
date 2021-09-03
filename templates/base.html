@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+    
+    <head>
+        {% block meta %}{% endblock %}
+        {% block title %}{% endblock %}
+        {% block extra %}{% endblock %}
+    </head>
+    
+    <body>
+    
+      <header>
+          <a class="logo" href="https://www.djangoproject.com/" target="_blank" rel="noopener">
+            Open Store
+          </a>
+          {% block header_nav %}{% endblock %}
+      </header>
+    
+      <main>
+          {% block main %}{% endblock %}
+      </main>
+    
+      <footer>
+          {% block footer_left %}{% endblock %}
+          {% block footer_center %}{% endblock %}
+          {% block footer_rigth %}{% endblock %}
+      </footer>
+    
+    </body>
+</html>

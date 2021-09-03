@@ -1,0 +1,70 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load svg %}
+
+{% block meta %}
+    <meta lang="en">
+    <meta name="author" content="Daniel Moune">
+    <meta name="description" content="Customizable online store  built with Django.">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block title %}
+    <title>Open Store is now available !!!!</title>
+{% endblock %}
+
+{% block extra %}
+    <link rel="stylesheet" type="text/css"  href="{% static 'css/fonts.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css'%}">
+{% endblock %}
+
+{% block header_nav %} 
+        <a class = "option" href="{% url 'products:index' %}" target="_blank" rel="noopener">
+            {% svg 'products' %}
+                <p><span class="option__heading">Products</span><span class="sr-only">.</span><br></p>
+        </a>
+        <a class = "option" href="{% url 'cart:index' %}" target="_blank" rel="noopener">
+            {% svg 'cart' %}
+                <p><span class="option__heading">Cart</span><span class="sr-only">.</span><br></p>
+        </a>
+        <a class = "option" href="{% url 'accounts:index' %}" target="_blank" rel="noopener">
+            {% svg 'login' %}
+                <p><span class="option__heading">Login</span><span class="sr-only">.</span><br></p>
+        </a>
+{% endblock %}
+        
+{% block main %}
+    {% svg 'rocket' %}
+    <h1>Make your order now!!!!</h1>
+    <p>and get<a href="https://docs.djangoproject.com/en/3.2/ref/settings/#debug" target="_blank" rel="noopener"> 50% discount</a> on delivery charges.</p>
+{% endblock %}
+    
+{% block footer_left %}
+    <a class="option" href="{% url 'stores:index' %}" target="_blank" rel="noopener">
+        {% svg 'store' %}
+        <p>
+            <span class="option__heading">Our Stores</span><span class="sr-only">.</span><br>
+        </p>
+    </a>
+{% endblock %}
+
+{% block footer_center %}
+    <a class="option" href="{% url 'tour:index' %}" target="_blank" rel="noopener">
+        <h2>{% svg 'code' %}</h2>
+        <p>
+            <span class="option__heading">Take a free tour!!!</span> <span class="sr-only">.</span><br>
+        </p>
+    </a>
+{% endblock %}
+
+{% block footer_rigth %}
+    <a class="option" href="{% url 'sponsors:index' %}" target="_blank" rel="noopener">
+         {% svg 'people' %}
+         <p>
+            <span class="option__heading">Our Sponsors</span><span class="sr-only">.</span><br>
+        </p>
+     </a>
+{% endblock %}

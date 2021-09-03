@@ -1,2 +1,2 @@
 # Open Store App
-Customizable app store built with Django.
+Customizable online store built with Django.
