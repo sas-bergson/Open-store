@@ -26,10 +26,11 @@ SECRET_KEY = 'django-insecure-gbr6yt1b4wdng2bh@xb*$(b@$p3(ztj=xi$29bw*^1$so#j$zv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1','::1']
 
 
 # Application definition
+# installed apps are actually the components of your Django Project
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -80,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'openstore_db',
-        'USER': 'openstore@dmin',
+        'USER': 'openstoreadmin',
         'PASSWORD': 'openStore@pp123456789',
         'HOST': 'localhost',
         'PORT': '3306',
